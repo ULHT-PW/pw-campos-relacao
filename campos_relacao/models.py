@@ -2,10 +2,19 @@ from django.db import models
 
 # Create your models here.
 
-class Escritor(models.Model):
-    nome = models.CharField(max_length=100)
+from django.db import models
+
+# classe abstrata
+class Pessoa(models.Model):
+    nome = models.CharField(max_length=100, default=None)
+    
+    class Meta:
+        abstract = True
+
+class Escritor(Pessoa):
+    pseudonimo = models.CharField(max_length=100)
     def __str__(self):
-        return self.nome
+        return f"{self.nome}, denominado '{self.pseudonimo}'"
 
 class Livro(models.Model):
     titulo = models.CharField(max_length=100)
